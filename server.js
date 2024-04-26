@@ -53,6 +53,7 @@ store.on("error", (err) => {
 });
 app.use(
   session({
+    store,
     secret: process.env.SECRET_CODE,
     resave: false,
     saveUninitialized: true,
