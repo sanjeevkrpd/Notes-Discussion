@@ -1,0 +1,30 @@
+<% layout('layouts/boilerplate.ejs') -%> <br /><br />
+
+<body>
+  <div class="row row-cols-lg-3">
+    <% searchResults.forEach((item) => { %>
+    <div class="col mt-4">
+      <div class="card h-100">
+        <img
+          src="<%= item.image.url %>"
+          class="card-img-top"
+          alt="<%= item.title %> Image"
+        />
+        <div class="card-body">
+          <h5 class="card-title"><%= item.title %></h5>
+          <p class="card-text">Semester <%= item.semester %></p>
+          <% if(currUser) { %>
+          <a href="<%= item.pdf %>" target="_blank" class="btn btn-primary"
+            >Go to PDF</a
+          >
+          <% } else { %>
+          <a href="/api/v1/user/register" class="btn btn-primary"
+            >Register For Download</a
+          >
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+</body>

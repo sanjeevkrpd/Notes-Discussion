@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-md text-bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand bold white" href="#"
+      ><i class="fa-solid fa-shield-halved color"></i> Notes Discussion</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <form
+        class="d-flex search-btn"
+        role="search"
+        method="post"
+        action="/api/v1/listing/search"
+      >
+        <input
+          class="form-control me-2 search-box"
+          type="search"
+          placeholder=" Title"
+          aria-label="Search"
+          name="title"
+        />
+        <button class="btn search-btn" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>Search
+        </button>
+      </form>
+
+      <div class="navbar-nav">
+        <a class="nav-link" href="/"
+          ><i class="fa-solid fa-house-user"></i>Home</a
+        >
+
+        <a class="nav-link" href="/api/v1/listing/about"
+          ><i class="fa-regular fa-address-card"></i> About</a
+        >
+        <!-- <a class="nav-link" href="/api/v1/user/contact"><i class="fa-solid fa-file-signature"></i>Contact</a> -->
+        <% if(!currUser) {%>
+        <a class="nav-link" href="/api/v1/user/login"
+          ><i class="fa-solid fa-right-to-bracket"></i>Login</a
+        >
+        <a class="nav-link" href="/api/v1/user/register"
+          ><i class="fa-regular fa-user"></i>Register</a
+        >
+        <% } %> <% if(currUser) {%>
+
+        <a class="nav-link" href="/api/v1/user/logout"
+          ><i class="fa-solid fa-down-left-and-up-right-to-center"></i>Logout</a
+        >
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

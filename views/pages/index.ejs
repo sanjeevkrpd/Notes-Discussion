@@ -1,0 +1,60 @@
+<% layout('layouts/boilerplate.ejs') -%> <br /><br />
+
+<body>
+  <div class="container">
+    <div class="container-md center">
+      <h4 class="heading">
+        Get Started With Hand Written Notes For Better Understanding...
+      </h4>
+    </div>
+    <div class="img">
+      <img src="/treeImg.png" class="img-fluid" alt="..." />
+    </div>
+  </div>
+
+  <div class="container-2">
+    <h3 class="small center">The Only Thing You Need To Register Yourself</h3>
+    <h4 class="small center">
+      And You'll Be Able To Access All The Notes For Free..
+    </h4>
+  </div>
+
+  <h2
+    style="
+      text-decoration: underline;
+      color: green;
+      text-align: center;
+      margin-top: 1rem;
+    "
+  >
+    We are Providing....
+  </h2>
+
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-3">
+    <% data.forEach((item) => { %>
+    <div class="col mt-4">
+      <div class="card h-100">
+        <img src="<%= item.image.url %>" class="card-img-top" alt="<%= item.title %> Image">
+        <div class="card-body">
+          <h5 class="card-title"><%= item.title %></h5>
+          <p class="card-text">Semester <%= item.semester %></p>
+          <% if(currUser) { %>
+          <a href="<%= item.pdf %>" target="_blank" class="btn btn-primary">Go to PDF</a>
+          <% } else { %>
+          <a href="/api/v1/user/register" class="btn btn-primary">Register For Download</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+  
+
+  <div class="center" style="margin-top: 4rem;">
+    <h3 >For More
+
+    </h3>
+     <a href="/api/v1/listing/about" class="btn btn-success">Click Me</a>
+    </div>
+  </div>
+</body>
