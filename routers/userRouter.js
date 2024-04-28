@@ -12,6 +12,23 @@ const router = express.Router();
 
 // get login
 router.get("/login", getLoginController);
+// get logout
+router.get("/logout", function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    req.flash("success", "Good Bye. You're logged Out!");
+    res.redirect("/");
+  });
+});
+// get register
+router.get("/register", getRegisterController);
+
+
+
+
+// post login
 router.post(
   "/login",
   passport.authenticate("local", {
@@ -24,19 +41,10 @@ router.post(
   }
 );
 
-// get register
-router.get("/register", getRegisterController);
+
 // post register
 router.post("/register", registerController);
 
-router.get("/logout", function (req, res, next) {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    req.flash("success", "Good Bye. You're logged Out!");
-    res.redirect("/");
-  });
-});
+
 
 module.exports = router;

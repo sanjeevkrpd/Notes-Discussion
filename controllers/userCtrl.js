@@ -1,4 +1,5 @@
-const userModel = require("../models/userModel");
+const User = require("../models/userModel");
+const passport = require("passport");
 // render login form
 const getLoginController = (req, res) => {
   res.render("pages/login.ejs");
@@ -14,29 +15,28 @@ const getRegisterController = (req, res) => {
 
 const registerController = async (req, res, next) => {
   try {
-    let { email, username, password } = req.body;
+    let { username, email, password } = req.body;
 
-    let userExist = await userModel.findOne({ email });
-    if (userExist) {
-      req.flash("error", "User Already Registered With This Email");
-      return res.redirect("/api/v1/user/register");
+    const validUser = await User.findOne({ email: req.body.email });
+
+    if (validUser) {
+      req.flash("error", "User Already Registered.");
+      res.redirect("/api/v1/user/login");
     }
 
-    const newUser = new userModel({ email, username }); 
-
-    const registeredUser = await newUser.save(); 
+    let newUser = new User({ email, username });
+    let registeredUser = await User.register(newUser, password);
 
     req.login(registeredUser, (err) => {
       if (err) {
-        return next(err);
+        next(err);
       }
-      req.flash("success", "Welcome to Stock Management.");
+      req.flash("success", "Welcome to the WanderLust");
       res.redirect("/");
     });
   } catch (error) {
-    console.log(error.message);
-    req.flash("error", "Something Went Wrong In Registering.");
-    res.redirect("/api/v1/user/register"); 
+    req.flash("error", error.message);
+    res.redirect("/api/v1/user/register");
   }
 };
 module.exports = {
@@ -44,4 +44,3 @@ module.exports = {
   getRegisterController,
   registerController,
 };
-
