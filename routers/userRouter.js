@@ -1,4 +1,5 @@
 const express = require("express");
+const { isLoggedIn } = require("../middleware");
 const {
   getLoginController,
   getRegisterController,

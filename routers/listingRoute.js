@@ -1,16 +1,16 @@
 const express = require("express");
+const { isLoggedIn } = require("../middleware");
 const {
   aboutController,
   singleListingController,
-  searchController
+  searchController,
 } = require("../controllers/listingCtrl");
 const router = express.Router();
 
 //get method
-router.get("/about", aboutController);
+router.get("/about", isLoggedIn, aboutController);
 
 // single listing controller
-router.get("/:id", singleListingController);
 
 //search
 router.post("/search", searchController);
