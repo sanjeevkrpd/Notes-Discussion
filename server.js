@@ -40,7 +40,7 @@ mongoose
 const store = MongoStore.create({
   mongoUrl: MONGODB_URL,
   crypto: {
-    secret: process.env.MY_SUPER_SECRET_CODE,
+    secret: process.env.MY_SUPER_SECRET_CODE || "thisismysupersecretcode",
   },
   touchAfter: 24 * 3600,
 });
@@ -51,7 +51,7 @@ store.on("error", (err) => {
 // Session middleware
 const sessionOption = {
   store,
-  secret: process.env.MY_SUPER_SECRET_CODE,
+  secret: process.env.MY_SUPER_SECRET_CODE || "thisismysupersecretcode",
   resave: false,
   saveUninitialized: true,
 };
