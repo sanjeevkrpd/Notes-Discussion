@@ -7,7 +7,7 @@
     "start": "nodemon server.js"
   },
   "keywords": [],
-  "author": "Sanjeev kumar",
+  "author": "Amar JEET PAL",
   "license": "ISC",
   "dependencies": {
     "connect-flash": "^0.1.1",

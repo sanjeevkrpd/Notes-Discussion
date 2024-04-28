@@ -42,6 +42,8 @@ const store = MongoStore.create({
     secret: process.env.MY_SUPER_SECRET_CODE || "thisissupersecretcode",
   },
   touchAfter: 24 * 3600,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 store.on("error", (err) => {
