@@ -26,8 +26,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // MongoDB connection
 const MONGODB_URL = process.env.MONGODB_URL;
+
 mongoose
-  .connect(MONGODB_URL, {})
+  .connect(MONGODB_URL)
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -39,7 +40,7 @@ mongoose
 const store = MongoStore.create({
   mongoUrl: MONGODB_URL,
   crypto: {
-    secret: process.env.MY_SUPER_SECRET_CODE || "thisissupersecretcode",
+    secret: process.env.MY_SUPER_SECRET_CODE,
   },
   touchAfter: 24 * 3600,
   useNewUrlParser: true,
@@ -53,10 +54,11 @@ store.on("error", (err) => {
 // Session middleware
 const sessionOption = {
   store,
-  secret: process.env.MY_SUPER_SECRET_CODE || "thisissupersecretcode",
+  secret: process.env.MY_SUPER_SECRET_CODE,
   resave: false,
   saveUninitialized: true,
 };
+
 app.use(session(sessionOption));
 app.use(flash());
 
