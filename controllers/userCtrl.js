@@ -21,7 +21,7 @@ const registerController = async (req, res, next) => {
 
     if (validUser) {
       req.flash("error", "User Already Registered.");
-      res.redirect("/api/v1/user/login");
+      return res.redirect("/api/v1/user/login"); // Add return statement here
     }
 
     let newUser = new User({ email, username });
@@ -29,16 +29,17 @@ const registerController = async (req, res, next) => {
 
     req.login(registeredUser, (err) => {
       if (err) {
-        next(err);
+        return next(err); // Add return statement here
       }
       req.flash("success", "Welcome to the WanderLust");
-      res.redirect("/");
+      return res.redirect("/"); // Add return statement here
     });
   } catch (error) {
     req.flash("error", error.message);
-    res.redirect("/api/v1/user/register");
+    return res.redirect("/api/v1/user/register"); // Add return statement here
   }
 };
+
 module.exports = {
   getLoginController,
   getRegisterController,
