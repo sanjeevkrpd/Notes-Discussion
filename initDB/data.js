@@ -180,3 +180,5 @@ const NotesDiscussion = [
         }
     }
 ];
+
+module.exports = NotesDiscussion;

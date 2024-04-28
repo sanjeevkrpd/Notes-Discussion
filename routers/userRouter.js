@@ -28,4 +28,14 @@ router.get("/register", getRegisterController);
 // post register
 router.post("/register", registerController);
 
+router.get("/logout", function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    req.flash("success", "Good Bye. You're logged Out!");
+    res.redirect("/");
+  });
+});
+
 module.exports = router;
