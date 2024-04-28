@@ -1,4 +1,6 @@
-{
+{  "engines":{
+  "node": "16.17.1"
+},
   "name": "notes_discussion",
   "version": "1.0.0",
   "description": "",
