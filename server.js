@@ -40,7 +40,7 @@ mongoose
 const store = MongoStore.create({
   mongoUrl: MONGODB_URL,
   crypto: {
-    secret: process.env.MY_SUPER_SECRET_CODE || "thisismysupersecretcode",
+    secret: process.env.MY_SUPER_SECRET_CODE,
   },
   touchAfter: 24 * 3600,
 });
@@ -51,7 +51,7 @@ store.on("error", (err) => {
 // Session middleware
 const sessionOption = {
   store,
-  secret: process.env.MY_SUPER_SECRET_CODE || "thisismysupersecretcode",
+  secret: process.env.MY_SUPER_SECRET_CODE,
   resave: false,
   saveUninitialized: true,
 };
@@ -91,7 +91,7 @@ app.get("/", async (req, res) => {
   let data = await File.find({});
   res.render("pages/index.ejs", { data });
 });
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
